@@ -36,14 +36,23 @@ def lvl(const):
         lvl1[5][17].add_loot(items["potion_1"])
         lvl1[19][17].add_loot(items["sword_1"])
         
+        lvl1[12][18].next_lvl = 2
+        
         return lvl1, 5, 12
     elif const == 2:
+        floar_id = 6
+        wall_id = 7
         
         f_r = open('./levels/level_2.txt', 'r')
+        
         lvl2 = [list(line) for line in f_r]
-                
-        f_r.close()        
-        return lvl2, 5, 12, [], [[4, 12, 1], [11, 20, 3]], 6, 7, [[10, 4, True, 11, 4, '>']]
+        for i in range(len(lvl2)):
+            for j in range(len(lvl2[i])):
+                lvl2[i][j] = parser(lvl2[i][j], floar_id, wall_id)
+        
+        f_r.close()
+        
+        return lvl2, 5, 12 # [], [[4, 12, 1], [11, 20, 3]], 6, 7, [[10, 4, True, 11, 4, '>']]
     elif const == 3:
         
         f_r = open('./levels/level_3.txt', 'r')

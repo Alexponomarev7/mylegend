@@ -18,6 +18,8 @@ Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA"""
 from repaint import repaint
 from tkinter import *
 from const import *
+from level import *
+import time
 
 class hero:    
     state = dict()
@@ -46,6 +48,7 @@ class hero:
     labels["right_hand"] = None
     
     loot = []
+    levels = [None] * 100
     
     # Canvases
     desk = None
@@ -175,13 +178,25 @@ class hero:
             block = self.level_map[self.y + step_y[i]][self.x + step_x[i]]
 
             if block.itype == CHEST:
-                print(1)
                 while len(self.loot) < 8 and len(block.loot) > 0:
                     self.loot.append(block.loot[0])
                     del(block.loot[0])
                 
                 self.level_map[self.y + step_y[i]][self.x + step_x[i]] = block
-        
+                break
+            elif block.itype == DOOR:
+                self.levels[self.level] = (self.level_map, self.x, self.y)
+                
+                self.level = block.next_lvl
+                print( self.level)
+                if self.levels[self.level] is None:
+                    self.level_map, self.x, self.y = lvl(self.level)
+                else:
+                    self.level_map, self.x, self.y = self.levels[self.level]
+                
+                time.sleep(0.5)
+                break
+                
         self.update()
         
         

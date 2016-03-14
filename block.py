@@ -57,5 +57,6 @@ def parser(symbol, floar_id, wall_id):
         result = block(symbol, 5, True)
     elif symbol == '>':
         result = block(symbol, 4, False, wall_id=wall_id)
+        result.itype = DOOR
         
     return result
