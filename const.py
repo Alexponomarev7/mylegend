@@ -93,6 +93,10 @@ step_x = [0, 0, 1, -1]
 step_y = [1, -1, 0, 0]
 
 FONT = "Symbol 20 underline"
+ARIAL = 'Arial 14 italic'
 
 CHEST = "chest"
 DOOR = "door"
+
+DESK_WIDTH = 179 * 2
+DESK_HEIGHT = 179 * 2

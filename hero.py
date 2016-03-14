@@ -24,7 +24,7 @@ class hero:
     state["helmet"] = None
     state["armory"] = None
     state["left_hand"] = None
-    state["boats"] = None
+    state["boots"] = None
     state["right_hand"] = None
     
     state["armor"] = 0
@@ -42,7 +42,7 @@ class hero:
     labels["helmet"] = None
     labels["armory"] = None
     labels["left_hand"] = None
-    labels["boats"] = None
+    labels["boots"] = None
     labels["right_hand"] = None
     
     loot = []
@@ -68,7 +68,9 @@ class hero:
     
     def droplefthand(self, event):
         if self.state["left_hand"] != None:
-            self.armor -= self.left_hand.armory
+            for i in self.state["left_hand"].effects:
+                self.state[i] -= self.state["left_hand"].effects[i]
+                
             self.loot.append(self.state["left_hand"])
             self.state["left_hand"] = None
         
@@ -76,21 +78,25 @@ class hero:
            
               
     def droprighthand(self, event):
-        if self.right_hand != None:
-            self.damage -= self.right_hand.damage
-            self.loot.append(self.right_hand)
-            self.right_hand = None
+        if self.state["right_hand"] != None:
+            for i in self.state["right_hand"].effects:
+                self.state[i] -= self.state["right_hand"].effects[i]
+                
+            self.loot.append(self.state["right_hand"])
+            self.state["right_hand"] = None
         
         self.update()   
               
               
     def drophelmet(self, event):
-        if self.helmet != None:
-            self.armor -= self.helmet.armory
-            self.loot.append(self.helmet)
-            self.helmet = None
+        if self.state["helmet"] != None:
+            for i in self.state["helmet"].effects:
+                self.state[i] -= self.state["helmet"].effects[i]
+                
+            self.loot.append(self.state["helmet"])
+            self.state["helmet"] = None
         
-        self.update()         
+        self.update()   
     
     
     def up(self, event):
@@ -101,6 +107,7 @@ class hero:
             self.state["stamina"] -= self.stamina_point
             
         self.update()
+    
         
     def down(self, event):
         IMAGES[1] = PhotoImage(file="src/mobs/hero.gif")   
@@ -135,45 +142,33 @@ class hero:
         
     def information(self, event):
         if len(self.loot) >= int(event.keysym):
+            item = self.loot[int(event.keysym) - 1]
+            
             inf = Tk()
-            inf.title(self.loot[int(event.keysym) - 1].itype)
+            inf.title(item.name)
             inf.resizable(width=False, height=False)
               
-            pan = Canvas(inf)
-            pan.pack()
-              
-            if self.loot[int(event.keysym) - 1].iclass == 'ataka':
-                Label(pan, text='Name: ' + str(self.loot[int(event.keysym) - 1].name)).grid(row=1, column=1+1)
-                Label(pan, text='Damage: ' + str(self.loot[int(event.keysym) - 1].damage)).grid(row=3, column=1+1)                      
-                Label(pan, text='Strength: ' + str(self.loot[int(event.keysym) - 1].health)).grid(row=4, column=1+1)
-                text1 = Text(pan, height=4, width=50, font='Arial 14 italic', wrap=WORD, fg='blue')
-                text1.insert(1.0,self.loot[int(event.keysym) - 1].about) 
-                scr = Scrollbar(pan)
-                scr.config(command=text1.yview)                    
-                text1.config(state = 'disabled', yscrollcommand=scr.set)
-                text1.grid(row=5, column=1+1)
-                scr.grid(row=5,column=1+2, sticky='ns')
-            elif self.loot[int(event.keysym) - 1].iclass == 'armory':
-                Label(pan, text='Name: ' + str(self.loot[int(event.keysym) - 1].name)).grid(row=1, column=1+1)
-                Label(pan, text='Armory: ' + str(self.loot[int(event.keysym) - 1].armory)).grid(row=2, column=1+1)
-                Label(pan, text='Strength: ' + str(self.loot[int(event.keysym) - 1].health)).grid(row=4, column=1+1)   
-                text1 = Text(pan, height=4, width=50, font='Arial 14 italic', wrap=WORD, fg='blue')
-                text1.insert(1.0,self.loot[int(event.keysym) - 1].about) 
-                scr = Scrollbar(pan)
-                scr.config(command=text1.yview)                    
-                text1.config(state = 'disabled', yscrollcommand=scr.set)
-                text1.grid(row=5, column=1+1)
-                scr.grid(row=5,column=1+2, sticky='ns')
-            elif self.loot[int(event.keysym) - 1].iclass == 'potion':
-                Label(pan, text='Имя: ' + str(self.loot[int(event.keysym) - 1].name)).grid(row=1, column=1+1)
-                text1 = Text(pan, height=4, width=50, font='Arial 14 italic', wrap=WORD, fg='blue')
-                text1.insert(1.0,self.loot[int(event.keysym) - 1].about) 
-                scr = Scrollbar(pan)
-                scr.config(command=text1.yview)                    
-                text1.config(state = 'disabled', yscrollcommand=scr.set)
-                text1.grid(row=5, column=1+1)
-                scr.grid(row=5,column=1+2, sticky='ns')    
-                   
+            cnv = Canvas(inf)
+            cnv.pack()
+                        
+            Label(cnv, text='Name: ' + item.name).grid(row=1, column=2)
+            Label(cnv, text='Strength: ' + item.strength).grid(row=2, column=2)
+            
+            row_num = 3
+            for i in item.effects:
+                count = str(item.effects[i])
+                Label(cnv, text=i + ": " + count).grid(row=row_num, column=2)
+                row_num += 1
+                
+            t = Text(cnv, height=4, width=50, font=ARIAL, wrap=WORD, fg='blue')
+            t.insert(1.0, item.about)
+
+            scr = Scrollbar(cnv)
+            scr.config(command=t.yview)                    
+            t.config(state = 'disabled', yscrollcommand=scr.set)
+            t.grid(row=5, column=1+1)
+            scr.grid(row=5,column=1+2, sticky='ns')
+            
               
     def interact(self, event):
         for i in range(4):
@@ -201,6 +196,7 @@ class hero:
                 
                      
         self.update()
+        
         
     def update(self):
         repaint(self)

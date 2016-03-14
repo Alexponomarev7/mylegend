@@ -11,10 +11,10 @@ class block:
     next_lvl = None
     loot = None
     
-    def __init__(self, symbol, image_id, is_floar, wall_id=None, floar_id=None, itype=None):
-        self.symbol = symbol
-        self.image_id = image_id
-        self.is_floar = is_floar
+    def __init__(self, smb, img, flag, wall_id=None, floar_id=None, itype=None):
+        self.symbol = smb
+        self.image_id = img
+        self.is_floar = flag
         self.wall_id = wall_id
         self.floar_id = floar_id
         self.itype = itype

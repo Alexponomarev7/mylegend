@@ -17,7 +17,9 @@ Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA"""
 
 BLUE = "blue"
 RED = "red"
-HEALTH_POS = (326, 276, 299)
+HEALTH_POS = (326, 276, 294)
+MANA_POS = (376, 276, 349)
+STAMINA_POS = (440, 276, 413)
 
 from tkinter import *
 from const import *
@@ -39,22 +41,26 @@ def clean(hero):
 def repaint(hero):
     clean(hero)
     
-    HEALTH_COUNT = 113 + ((100 - hero.state["health"])/ 100) * (86 * 2)
+    HIGH_H = 109 + ((100 - hero.state["health"])/ 100) * (86 * 2)
+    HIGH_M = 109 + ((100 - hero.state["mana"])/ 100) * (86 * 2)
+    HIGH_S = 109 + ((100 - hero.state["stamina"] )/ 100) * (276 - 109)
     
-    health = hero.character.create_rectangle(HEALTH_POS, HEALTH_COUNT, fill=RED)
+    health = hero.character.create_rectangle(HEALTH_POS, HIGH_H, fill=RED)
     hero.images["character"].append(health)
     
-    mana = hero.character.create_rectangle(379, 276, 365, 113 + ((100 - hero.state["mana"])/ 100) * (86 * 2), fill=BLUE)
+    mana = hero.character.create_rectangle(MANA_POS, HIGH_M, fill=BLUE)
     hero.images["character"].append(mana)
     
-    stamina = hero.character.create_rectangle(440, 276, 415, 109 + ((100 - hero.state["stamina"] )/ 100) * (276 - 109), fill="green") 
+    stamina = hero.character.create_rectangle(STAMINA_POS, HIGH_S, fill="green") 
     hero.images["character"].append(stamina)
     
-    equips = ["right_hand", "helmet", "left_hand", "boats", "armory"]
+    equips = ["right_hand", "helmet", "left_hand", "boots", "armory"]
     
     for equip in equips:
         if hero.state[equip] != None:
-            hero.labels[equip].configure(text=hero.state[equip].name)        
+            hero.labels[equip].configure(text=hero.state[equip].name)  
+        else:
+            hero.labels[equip].configure(text="")              
     
     for i in range(len(hero.loot)):
         hero.images["loot_pan"].append(hero.loot_pan.create_image(37 + 34 * i, 5, anchor=NE, image=V_LOOT[hero.loot[i].image_id]))
