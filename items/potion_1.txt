@@ -1,0 +1,6 @@
+Type: potion
+Name: red potion
+About: Red glass bottle small size(like your dick), which full of red thick liquid, looks like and smells bad.
+Strength: 1
+ImageID: 1
+health: +50

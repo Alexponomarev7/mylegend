@@ -1,0 +1,6 @@
+Type: right_hand
+Name: usual steel sword
+About: Old sword, which has long been covered with rust , it can only give your mummy as a dildo, for the rest of it is useless , but it you can still cook REAL GANGSTA SHIT NIGGAS MEAL, so look for a fire, bitch!
+Strength: 50
+ImageID: 0
+damage: 50
