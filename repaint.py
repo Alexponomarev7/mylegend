@@ -63,7 +63,9 @@ def repaint(hero):
             hero.labels[equip].configure(text="")              
     
     for i in range(len(hero.loot)):
-        hero.images["loot_pan"].append(hero.loot_pan.create_image(37 + 34 * i, 5, anchor=NE, image=V_LOOT[hero.loot[i].image_id]))
+        img = hero.loot[i].image_id
+        pos = (37 + 34 * i, 5)
+        hero.images["loot_pan"].append(hero.loot_pan.create_image(pos, anchor=NE, image=V_LOOT[img]))
         
     
     for i in range(-5, 6):
