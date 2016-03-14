@@ -62,6 +62,9 @@ def make_label_for(self, txt):
     return Label(self, text=txt, anchor=NW, fg="green", bg="black", font=FONT)
 
 
+def label_for_equip(self):
+    return Label(self, text="", anchor=NW, fg=HIGH_BLUE, bg="black", font=ARIAL20)
+
 IMAGES = ["src/stones/stone.gif",    #0
           "src/mobs/hero.gif",       #1
           "src/floar/floar.gif",     #2
@@ -94,6 +97,9 @@ step_y = [1, -1, 0, 0]
 
 FONT = "Symbol 20 underline"
 ARIAL = 'Arial 14 italic'
+ARIAL20 = "Arial 20 italic"
+
+HIGH_BLUE = "#%02x%02x%02x" % (0, 191, 255)
 
 CHEST = "chest"
 DOOR = "door"

@@ -1,0 +1,6 @@
+Type: helmet
+Name: usual steel helmet
+About: Mmm… Bucket it is a bucket.
+Strength: 100
+ImageID: 0
+armor: 20

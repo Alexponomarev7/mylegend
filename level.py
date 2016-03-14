@@ -60,8 +60,6 @@ def lvl(const):
                                                 
         f_r.close() 
         
-        about_helmet = "Мда... Ведро - оно и есть ведро"
-        about_shield = "Достаточно прочный старый стальной щит, тяжелый правда, но скорость не снизит, а вот уставать сильнее буду"
         loot = [[5, 19, helmet(10, 100, 2, "usual helmet", about_helmet)],
                 [7, 19, shield(10, 100, 3, "usual shield", about_shield)]]
         

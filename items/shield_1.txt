@@ -1,0 +1,6 @@
+Type: shield
+Name: usual steel shield
+About: Strong enough old steel shield , a hard truth , but the speed will not reduce , but will be more tired.
+Strength: 100
+ImageID: 0
+armor: 20

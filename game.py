@@ -48,36 +48,37 @@ if __name__ == '__main__':
      
      load()     
      
-     new = Frame(root, highlightthickness=0, width=(w - ((32 * 11) + 454)) / 2, height = 0, bd=0, relief='ridge', bg="black")
+     f_width = (w - ((32 * 11) + 454)) / 2
+     new = Frame(root, highlightthickness=0, width=f_width, height=0, bd=0, relief='ridge', bg="black")
      new.grid(row=1,column=0)     
      
      knight.desk = Canvas(root, highlightthickness=0, width=DESK_WIDTH, height=DESK_HEIGHT, bd=0, relief='ridge', bg="black")
      knight.desk.create_rectangle(6, 6, 179 * 2 - 1, 179 * 2 - 1, fill="black")
-     knight.desk.grid(row=1,column=1+0)
+     knight.desk.grid(row=1,column=1)
      
      knight.character = Canvas(root, width=460, highlightthickness=0, height = 298, bg="black", bd=0, relief='ridge')
      knight.character.grid(row=1, column=2,sticky=NW)          
      img = PhotoImage(file="src/system/char.gif")
      knight.character.create_image(3, 3, anchor=NW, image=img)
      
-     knight.loot_pan = Canvas(root, width = 416, height = 42, highlightthickness=0, bg="black", bd=0, relief='ridge')
-     knight.loot_pan.grid(row=1, column=1+1,sticky=S)
+     knight.loot_pan = Canvas(root, width = 416, height=42, highlightthickness=0, bg="black", bd=0, relief='ridge')
+     knight.loot_pan.grid(row=1, column=2,sticky=S)
      img1 = PhotoImage(file="src/system/slot.gif")
      knight.loot_pan.create_image(3, 3, anchor=NW, image=img1)
      
-     knight.labels["right_hand"] = Label(root, text="", anchor=NW, fg="#%02x%02x%02x" % (0, 191, 255), bg="black", font="Arial 20 italic")
+     knight.labels["right_hand"] = label_for_equip(root)
      knight.labels["right_hand"].grid(row=3, column=2, sticky=NE)
      
-     knight.labels["left_hand"] = Label(root, text="", anchor=NW, fg="#%02x%02x%02x" % (0, 191, 255), bg="black", font="Arial 20 italic")
+     knight.labels["left_hand"] = label_for_equip(root)
      knight.labels["left_hand"].grid(row=2, column=2, sticky=NE)
 
-     knight.labels["helmet"] = Label(root, text="", anchor=NW, fg="#%02x%02x%02x" % (0, 191, 255), bg="black", font="Arial 20 italic")
+     knight.labels["helmet"] = label_for_equip(root)
      knight.labels["helmet"].grid(row=2, column=1, sticky=NE)
 
-     knight.labels["boots"] = Label(root, text="", anchor=NW, fg="#%02x%02x%02x" % (0, 191, 255), bg="black", font="Arial 20 italic")
+     knight.labels["boots"] = label_for_equip(root)
      knight.labels["boots"].grid(row=4, column=1, sticky=NE)
 
-     knight.labels["armory"] = Label(root, text="", anchor=NW, fg="#%02x%02x%02x" % (0, 191, 255), bg="black", font="Arial 20 italic")
+     knight.labels["armory"] = label_for_equip(root)
      knight.labels["armory"].grid(row=3, column=1, sticky=NE)
      
      
