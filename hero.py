@@ -20,21 +20,9 @@ from tkinter import *
 from const import *
 from level import *
 import time
+from mob import mob
 
-class hero:    
-    state = dict()
-    state["helmet"] = None
-    state["armory"] = None
-    state["left_hand"] = None
-    state["boots"] = None
-    state["right_hand"] = None
-    
-    state["armor"] = 0
-    state["health"] = 100
-    state["mana"] = 100
-    state["stamina"] = 100
-    state["damage"] = 20
-    
+class hero(mob):        
     images = dict()
     images["loot_pan"] = []
     images["character"] = []
@@ -47,7 +35,6 @@ class hero:
     labels["boots"] = None
     labels["right_hand"] = None
     
-    loot = []
     levels = [None] * 100
     
     # Canvases
@@ -57,16 +44,12 @@ class hero:
     # end
     
     level = 1
-    level_map = None
-    
-    x, y = None, None
-    
+    level_map = None    
     stamina_point = 1
     
     
     def __init__(self, x_pos, y_pos):
-        self.x = x_pos
-        self.y = y_pos
+        super().__init__(x_pos, y_pos)
     
     
     def droplefthand(self, event):
@@ -185,14 +168,15 @@ class hero:
                 self.level_map[self.y + step_y[i]][self.x + step_x[i]] = block
                 break
             elif block.itype == DOOR:
-                self.levels[self.level] = (self.level_map, self.x, self.y)
+                self.levels[self.level] = self.level_map
                 
                 self.level = block.next_lvl
-                print( self.level)
+                self.x, self.y = block.next_pos
+                
                 if self.levels[self.level] is None:
-                    self.level_map, self.x, self.y = lvl(self.level)
+                    self.level_map = lvl(self.level)
                 else:
-                    self.level_map, self.x, self.y = self.levels[self.level]
+                    self.level_map = self.levels[self.level]
                 
                 time.sleep(0.5)
                 break

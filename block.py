@@ -26,6 +26,8 @@ class block:
     itype = None
     
     next_lvl = None
+    next_pos = None
+    
     loot = None
     
     def __init__(self, smb, img, flag, wall_id=None, floar_id=None, itype=None):
@@ -58,5 +60,8 @@ def parser(symbol, floar_id, wall_id):
     elif symbol == '>':
         result = block(symbol, 4, False, wall_id=wall_id)
         result.itype = DOOR
+    elif symbol == 'K':
+        result = block(symbol, 8, False, floar_id=floar_id)        
+        
         
     return result

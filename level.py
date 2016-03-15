@@ -37,12 +37,12 @@ def lvl(const):
         lvl1[19][17].add_loot(items["sword_1"])
         
         lvl1[12][18].next_lvl = 2
+        lvl1[12][18].next_pos = (5, 12)
         
-        return lvl1, 5, 12
+        return lvl1
     elif const == 2:
         floar_id = 6
         wall_id = 7
-        
         f_r = open('./levels/level_2.txt', 'r')
         
         lvl2 = [list(line) for line in f_r]
@@ -52,7 +52,7 @@ def lvl(const):
         
         f_r.close()
         
-        return lvl2, 5, 12 # [], [[4, 12, 1], [11, 20, 3]], 6, 7, [[10, 4, True, 11, 4, '>']]
+        return lvl2 # [], [[4, 12, 1], [11, 20, 3]], 6, 7, [[10, 4, True, 11, 4, '>']]
     elif const == 3:
         
         f_r = open('./levels/level_3.txt', 'r')

@@ -77,6 +77,7 @@ def repaint(hero):
             if block is None:
                 continue
             
+            
             if block.wall_id != None:
                 wall = hero.desk.create_image(x, y, anchor=NE, image=IMAGES[block.wall_id])
                 hero.images["desk"].append(wall)

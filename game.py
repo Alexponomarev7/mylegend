@@ -33,9 +33,8 @@ def load():
           
 
 if __name__ == '__main__':
-     level, x, y  = lvl(1)
-     knight = hero(x, y)
-     knight.level_map = level
+     knight = hero(5, 12)
+     knight.level_map = lvl(1)
           
      root = Tk()     
      root.state("zoomed")     
